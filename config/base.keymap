@@ -239,11 +239,11 @@ ZMK_CONDITIONAL_LAYER(FN NUM, SYS)  // FN + NUM --> SYS
 
 ZMK_LAYER(base,
 //╭──────┬───────────────┬─────────────┬─────────────┬─────────────┬─────────────╮  ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬────────╮
-    &kp 1    &kp Q         &kp W         &kp E         &kp R         &kp T            &kp Y         &kp U         &kp I         &kp O         &kp P           &kp 4
+    &kp N1    &kp Q         &kp W         &kp E         &kp R         &kp T            &kp Y         &kp U         &kp I         &kp O         &kp P           &kp N4
 //├──────┼───────────────┼─────────────┼─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┴────────┤
-    &kp 2    &hml LCTRL A   &hml LALT S   &hml LGUI D  &hml LSHFT F  &kp G            &kp H         &hmr RSHFT J  &hmr LCTRL K  &hmr LALT L   &hmr SQT LGUI   &kp 5
+    &kp N2    &hml LCTRL A   &hml LALT S   &hml LGUI D  &hml LSHFT F  &kp G            &kp H         &hmr RSHFT J  &hmr LCTRL K  &hmr LALT L   &hmr SQT LGUI   &kp N5
 //├──────┼───────────────┼─────────────┼─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┴────────┤
-    &kp 3    &kp Z         &kp X         &kp C         &kp V         &kp B            &kp N         &kp M         &kp COMMA        &kp DOT    &FSLH           &kp 6
+    &kp N3    &kp Z         &kp X         &kp C         &kp V         &kp B            &kp N         &kp M         &kp COMMA        &kp DOT    &FSLH           &kp N6
 //├──────┤ ╰─────────────┼─────────────┴─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┴───────────────────────────┴────────╯
                                            &kp Z        SMART_NUM   &lt_spc NAV 0     &lt FN RET    &smart_shft    &kp A       
 //                                     ╰─────────────┴─────────────┴─────────────╯  ╰─────────────┴─────────────┴─────────────╯
