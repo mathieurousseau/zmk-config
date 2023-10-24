@@ -66,34 +66,6 @@ MAKE_HRM(hml_repeat, &kp, &key_repeat, KEYS_R THUMBS)  // used for HRM-combo
 MAKE_HRM(hmr_lpar_lt, &kp, &lpar_lt, KEYS_L THUMBS)    // "    "   "   "
 MAKE_HRM(hmr_rpar_gt, &kp, &rpar_gt, KEYS_L THUMBS)    // "    "   "   "
 
-/* Nav cluster */
-
-// long-tap action on hold, short-tap action on all interrupts
-#define MT_CORE \
-    flavor = "tap-preferred"; \
-    tapping-term-ms = <220>; \
-    quick-tap-ms = <220>; \
-    hold-trigger-key-positions = <0>;
-
-&mt { MT_CORE };
-ZMK_BEHAVIOR(mt_home, hold_tap, bindings = <&masked_home>, <&kp>; MT_CORE)
-ZMK_BEHAVIOR(mt_end,  hold_tap,  bindings = <&masked_end>, <&kp>; MT_CORE)
-
-#define NAV_LEFT  &mt_home 0   LEFT    // tap: left  | long-tap: beginning of line
-#define NAV_RIGHT &mt_end 0    RIGHT   // tap: right | long-tap: end       of line
-#define NAV_UP    &mt LC(HOME) UP      // tap: up    | long-tap: beginning of document
-#define NAV_DOWN  &mt LC(END)  DOWN    // tap: down  | long-tap: end       of document
-#define NAV_BSPC  &mt LC(BSPC) BSPC    // tap: bspc  | long-tap: delete word backward
-#define NAV_DEL   &mt LC(DEL)  DEL     // tap: del   | long-tap: delete word forward
-
-// mask CTRL when holding left/right to avoid accidental jumps to beginning/end of document
-#define MASK_MODS(NAME, MODS, BINDING) \
-    ZMK_BEHAVIOR(NAME, mod_morph, \
-        bindings = <BINDING>, <BINDING>; \
-        mods = <MODS>; \
-    )
-MASK_MODS(masked_home, (MOD_LCTL), &kp HOME)
-MASK_MODS(masked_end,  (MOD_LCTL), &kp END)
 
 /* Caps-word, num-word and smart-mouse */
 
@@ -152,54 +124,16 @@ ZMK_BEHAVIOR(uc_shift, macro,
              , <&macro_release &mo UC &kp LSHFT>;
 )
 
-// tap: comma | shift + tap: semicolon | ctrl + shift + tap: <
+// tap: comma | shift + tap: semicolon 
 ZMK_BEHAVIOR(comma_morph, mod_morph,
     mods = <(MOD_LSFT|MOD_RSFT)>;
-    bindings = <&kp COMMA>, <&comma_inner_morph>;
-)
-ZMK_BEHAVIOR(comma_inner_morph, mod_morph,
-    bindings = <&kp SEMICOLON>, <&kp LESS_THAN>;
-    mods = <(MOD_LCTL|MOD_RCTL)>;
+    bindings = <&kp COMMA>, <&kp SEMICOLON>;
 )
 
-// tap: dot | shift + tap: colon | ctrl + shift + tap: >
+// tap: dot | shift + tap: pipe 
 ZMK_BEHAVIOR(dot_morph, mod_morph,
-    bindings = <&kp DOT>, <&dot_inner_morph>;
+    bindings = <&kp DOT>, <&kp PIPE>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
-)
-ZMK_BEHAVIOR(dot_inner_morph, mod_morph,
-    bindings = <&kp COLON>, <&kp GREATER_THAN>;
-    mods = <(MOD_LCTL|MOD_RCTL)>;
-)
-
-// tap: qmark | shift + tap: excl
-ZMK_BEHAVIOR(qexcl, mod_morph,
-    bindings = <&kp QMARK>, <&kp EXCL>;
-    mods = <(MOD_LSFT|MOD_RSFT)>;
-)
-
-// tap: space | shift + tap: dot -> space -> sticky shift | hold: activate layer
-ZMK_BEHAVIOR(lt_spc, hold_tap,
-    flavor = "balanced";
-    tapping-term-ms = <200>;
-    quick-tap-ms = <QUICK_TAP_MS>;
-    bindings = <&mo>, <&spc_morph>;
-)
-ZMK_BEHAVIOR(spc_morph, mod_morph,
-    bindings = <&kp SPACE>, <&dot_spc>;
-    mods = <(MOD_LSFT|MOD_RSFT)>;
-)
-ZMK_BEHAVIOR(dot_spc, macro,
-    wait-ms = <0>;
-    tap-ms = <5>;
-    bindings = <&kp DOT &kp SPACE &sk LSHFT>;
-)
-
-// tap: backspace | lshft + tap: delete | rshft + tap: shift-delete
-ZMK_BEHAVIOR(bs_del, mod_morph,
-    bindings = <&kp BSPC>, <&kp DEL>;
-    mods = <(MOD_LSFT|MOD_RSFT)>;
-    keep-mods = <MOD_RSFT>;
 )
 
 // tap: left-parenthesis | shft + tap: less-than
@@ -214,27 +148,8 @@ ZMK_BEHAVIOR(rpar_gt, mod_morph,
     mods = <(MOD_LSFT|MOD_RSFT)>;
 )
 
-// tap: copy | double-tap: cut
-ZMK_BEHAVIOR(copy_cut, tap_dance,
-    tapping-term-ms = <200>;
-    bindings = <&kp LC(INS)>, <&kp LC(X)>;
-)
-
-// Windows sleep key
-ZMK_BEHAVIOR(win_sleep, macro,
-    wait-ms = <500>;
-    tap-ms = <50>;
-    bindings = <&kp LG(X) &kp U &kp S>;
-)
-
 // misc aliases
 #define CANCEL      &kp K_CANCEL             // cancel caps-word, num-word and smart-mouse
-#define DSK_PREV    &hmr RSHFT LG(LC(LEFT))  // previous desktop
-#define DSK_NEXT    &hmr LALT LG(LC(RIGHT))  // next     desktop
-#define PIN_WIN     &kp LG(LC(LS(Q)))        // pin window across desktops
-#define PIN_APP     &kp LG(LC(LS(A)))        // pin application across desktops
-#define DSK_MGR     &kp LA(GRAVE)            // desktop manager
-#define VOL_DOWN    &hmr LCTRL C_VOL_DN
 
 /* Keymap */
 
@@ -242,21 +157,21 @@ ZMK_CONDITIONAL_LAYER(FN NUM, SYS)  // FN + NUM --> SYS
 
 ZMK_LAYER(base,
 //╭──────┬───────────────┬─────────────┬─────────────┬─────────────┬─────────────╮  ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬────────╮
-    &kp N1    &kp Q         &kp W         &kp E         &kp R         &kp T            &kp Y         &kp U         &kp I         &kp O         &kp P        &kp GRAVE
+    ___        &kp Q         &kp W         &kp E         &kp R         &kp T            &kp Y         &kp U         &kp I         &kp O         &kp P        &kp GRAVE
 //├──────┼───────────────┼─────────────┼─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┴────────┤
-    &kp TAB   &hml LCTRL A   &hml LALT S   &hml LGUI D  &hml LSHFT F  &kp G            &kp H         &hmr RSHFT J  &hmr LGUI K  &hmr LALT L   &hmr LCTRL SEMI   &kp SQT
+    ___        &hml LCTRL A   &hml LALT S   &hml LGUI D  &hml LSHFT F  &kp G            &kp H         &hmr RSHFT J  &hmr LGUI K  &hmr LALT L   &hmr LCTRL SEMI   &kp SQT
 //├──────┼───────────────┼─────────────┼─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┴────────┤
-   &kp LSHFT    &kp Z         &kp X         &kp C         &kp V         &kp B            &kp N         &kp M         &kp COMMA        &kp DOT    &kp FSLH     &kp BSLH
+    ___         &kp Z         &kp X         &kp C         &kp V         &kp B            &kp N         &kp M      &comma_morph  &dot_morph    &kp FSLH     &kp BSLH
 //├──────┤ ╰─────────────┼─────────────┴─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┴───────────────────────────┴────────╯
-                                        &lt UC &trans   SMART_NUM   &lt NAV SPACE     &lt NUM RET    &smart_shft    &lt FN &trans      
+                                         &mo UC         SMART_NUM   &lt NAV SPACE     &lt NUM RET    &smart_shft    &lt FN &trans      
 //                                     ╰─────────────┴─────────────┴─────────────╯  ╰─────────────┴─────────────┴─────────────╯
 )
 
 ZMK_LAYER(nav,
 //╭──────┬───────────────┬─────────────┬─────────────┬─────────────┬─────────────╮  ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬────────╮
-    ___      ___           ___           &kp LS(TAB)   &swapper      ___              &kp PG_UP     NAV_BSPC      NAV_UP        NAV_DEL       ___             ___ 
+    ___      ___           ___           &kp LS(TAB)   &swapper      ___              &kp PG_UP     &kp BSPC      &kp UP        &kp DEL       ___             ___ 
 //├──────┼───────────────┼─────────────┼─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼────────┤
-    ___      &sk LCTRL      &sk LALT      &sk  LGUI    &sk LSHFT     ___              &kp PG_DN     NAV_LEFT      NAV_DOWN      NAV_RIGHT     &kp RET         ___ 
+    ___      &sk LCTRL      &sk LALT      &sk  LGUI    &sk LSHFT     ___              &kp PG_DN     &kp LEFT      &kp DOWN      &kp RIGHT     &kp RET         ___ 
 //├──────┼───────────────┼─────────────┼─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼────────┤
     ___      ___           ___           ___           ___           ___              &kp INS       &kp TAB       &kp LT        &kp GT        ___             ___ 
 //├──────┤ ╰─────────────┼─────────────┴─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┴───────────────────────────┴────────┤
@@ -266,23 +181,23 @@ ZMK_LAYER(nav,
 
 ZMK_LAYER(fn,
 //╭──────┬───────────────┬─────────────┬─────────────┬─────────────┬─────────────╮  ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬────────╮
-    ___      &kp F12       &kp F7        &kp F8        &kp F9        ___              ___           &kp C_PREV    &kp C_VOL_UP  &kp C_NEXT    &win_sleep      ___ 
+    ___      &kp F12       &kp F7        &kp F8        &kp F9        ___              ___            ___          ___           ___           ___             ___ 
 //├──────┼───────────────┼─────────────┼─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼────────┤
-    ___      &kp F11       &kp F4        &kp F5        &kp F6        ___              ___           DSK_PREV      VOL_DOWN      DSK_NEXT      ___             ___ 
+    ___      &kp F11       &kp F4        &kp F5        &kp F6        ___              ___           ___           ___           ___            ___             ___ 
 //├──────┼───────────────┼─────────────┼─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼────────┤
     ___      &kp F10       &kp F1        &kp F2        &kp F3        ___              ___           ___           ___           ___           ___             ___ 
 //├──────┤ ╰─────────────┼─────────────┴─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┴───────────────────────────┴────────┤
-                                           ___         ___           ___              &kp C_MUTE    &kp C_PP         ___                                          
+                                           ___         ___           ___               ___            ___         ___                                          
 //                                     ╰─────────────┴─────────────┴─────────────╯  ╰─────────────┴─────────────┴─────────────╯                                     
 )
 
 ZMK_LAYER(num,
 //╭──────┬───────────────┬─────────────┬─────────────┬─────────────┬─────────────╮  ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬────────╮
-    ___      &kp EXCL          &kp AT      &kp HASH      &kp DLLR      &kp PRCNT         &kp CARET     &kp AMPS  &kp KP_MULTIPLY  &kp UNDER    &kp MINUS     &kp PLUS     
+    ___       ___              ___         ___          ___            ___            ___          &kp AMPS  &kp KP_MULTIPLY  &kp UNDER       &kp MINUS        ___         
 //├──────┼───────────────┼─────────────┼─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼────────┤
-    ___    &hml LCTRL N1  &hml LALT N2   &hml LGUI N3  &hml LSHFT  N4       &kp N5     &kp N6      &hmr RSHFT N7  &hmr LGUI N8  &hmr LALT N9 &hmr LCTRL N0    &kp EQUAL 
+    ___        ___             ___            ___           ___          ___          ___           &kp EXCL     &kp HASH      &kp DLLR       &kp PLUS     &kp EQUAL       
 //├──────┼───────────────┼─────────────┼─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼────────┤
-   &kp F12     &kp F1         &kp F2         &kp F3         &kp F4      &kp F5          &kp F6         &kp F7        &kp F8        &kp F9        &kp F10     &kp F11 
+    ___        ___          ___             ___             ___          ___            ___          &kp CARET     &kp AT      &kp PRCNT         ___         ___    
 //├──────┤ ╰─────────────┼─────────────┴─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┴───────────────────────────┴────────┤
                                            ___         ___           ___              ___           ___              ___                                             
 //                                     ╰─────────────┴─────────────┴─────────────╯  ╰───────────────────────────┴─────────────╯                                      
@@ -304,11 +219,11 @@ ZMK_LAYER(uc,
 //╭──────┬───────────────┬─────────────┬─────────────┬─────────────┬─────────────╮  ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬────────╮
     ___      ___           &kp N7        &kp N8        &kp N9        ___               &kp FSLH        &kp N7        &kp N8        &kp N9        &kp MINUS       ___ 
 //├──────┼───────────────┼─────────────┼─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼────────┤
-    ___      &hml LCTRL N0  &hml LALT N4  &hml LGUI N5 &hml LSHFT N6 ___            &kp KP_MULTIPLY  &hmr RSHFT N4  &hmr LGUI N5  &hmr LALT N6 &hmr LCTRL PLUS  ___ 
+    ___      &hml LCTRL N0  &hml LALT N4  &hml LGUI N5 &hml LSHFT N6 ___            &kp KP_MULTIPLY  &hmr RSHFT N4  &hmr LGUI N5  &hmr LALT N6 &hmr LCTRL PLUS  &kp EQUAL
 //├──────┼───────────────┼─────────────┼─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼────────┤
-    ___      ___           &kp N1        &kp N2        &kp N3        ___              &kp N0        &kp N1        &kp N2        &kp N3        &kp DOT        ___ 
+    ___      ___           &kp N1        &kp N2        &kp N3        ___              ___             &kp N1        &kp N2        &kp N3        &kp DOT        ___ 
 //├──────┤ ╰─────────────┼─────────────┴─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┴───────────────────────────┴────────┤
-                                                       ___           ___              ___             ___            ___                                              
+                                            ___       ___           ___              ___            &kp N0            ___                                              
 //                                     ╰─────────────┴─────────────┴─────────────╯  ╰─────────────┴─────────────┴─────────────╯                                       
 )
 
