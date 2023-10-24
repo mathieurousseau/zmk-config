@@ -124,54 +124,16 @@ ZMK_BEHAVIOR(uc_shift, macro,
              , <&macro_release &mo UC &kp LSHFT>;
 )
 
-// tap: comma | shift + tap: semicolon | ctrl + shift + tap: <
+// tap: comma | shift + tap: semicolon 
 ZMK_BEHAVIOR(comma_morph, mod_morph,
     mods = <(MOD_LSFT|MOD_RSFT)>;
-    bindings = <&kp COMMA>, <&comma_inner_morph>;
-)
-ZMK_BEHAVIOR(comma_inner_morph, mod_morph,
-    bindings = <&kp SEMICOLON>, <&kp LESS_THAN>;
-    mods = <(MOD_LCTL|MOD_RCTL)>;
+    bindings = <&kp COMMA>, <&kp SEMICOLON>;
 )
 
-// tap: dot | shift + tap: colon | ctrl + shift + tap: >
+// tap: dot | shift + tap: pipe 
 ZMK_BEHAVIOR(dot_morph, mod_morph,
-    bindings = <&kp DOT>, <&dot_inner_morph>;
+    bindings = <&kp DOT>, <&kp PIPE>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
-)
-ZMK_BEHAVIOR(dot_inner_morph, mod_morph,
-    bindings = <&kp COLON>, <&kp GREATER_THAN>;
-    mods = <(MOD_LCTL|MOD_RCTL)>;
-)
-
-// tap: qmark | shift + tap: excl
-ZMK_BEHAVIOR(qexcl, mod_morph,
-    bindings = <&kp QMARK>, <&kp EXCL>;
-    mods = <(MOD_LSFT|MOD_RSFT)>;
-)
-
-// tap: space | shift + tap: dot -> space -> sticky shift | hold: activate layer
-ZMK_BEHAVIOR(lt_spc, hold_tap,
-    flavor = "balanced";
-    tapping-term-ms = <200>;
-    quick-tap-ms = <QUICK_TAP_MS>;
-    bindings = <&mo>, <&spc_morph>;
-)
-ZMK_BEHAVIOR(spc_morph, mod_morph,
-    bindings = <&kp SPACE>, <&dot_spc>;
-    mods = <(MOD_LSFT|MOD_RSFT)>;
-)
-ZMK_BEHAVIOR(dot_spc, macro,
-    wait-ms = <0>;
-    tap-ms = <5>;
-    bindings = <&kp DOT &kp SPACE &sk LSHFT>;
-)
-
-// tap: backspace | lshft + tap: delete | rshft + tap: shift-delete
-ZMK_BEHAVIOR(bs_del, mod_morph,
-    bindings = <&kp BSPC>, <&kp DEL>;
-    mods = <(MOD_LSFT|MOD_RSFT)>;
-    keep-mods = <MOD_RSFT>;
 )
 
 // tap: left-parenthesis | shft + tap: less-than
@@ -184,12 +146,6 @@ ZMK_BEHAVIOR(lpar_lt, mod_morph,
 ZMK_BEHAVIOR(rpar_gt, mod_morph,
     bindings = <&kp RPAR>, <&kp GT>;
     mods = <(MOD_LSFT|MOD_RSFT)>;
-)
-
-// tap: copy | double-tap: cut
-ZMK_BEHAVIOR(copy_cut, tap_dance,
-    tapping-term-ms = <200>;
-    bindings = <&kp LC(INS)>, <&kp LC(X)>;
 )
 
 // misc aliases
@@ -237,11 +193,11 @@ ZMK_LAYER(fn,
 
 ZMK_LAYER(num,
 //╭──────┬───────────────┬─────────────┬─────────────┬─────────────┬─────────────╮  ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬────────╮
-    ___      &kp EXCL          &kp AT      &kp HASH      &kp DLLR      &kp PRCNT         &kp CARET     &kp AMPS  &kp KP_MULTIPLY  &kp UNDER    &kp MINUS     &kp PLUS     
+    ___       ___              ___         ___          ___            ___            ___          &kp AMPS  &kp KP_MULTIPLY  &kp UNDER       &kp MINUS        ___         
 //├──────┼───────────────┼─────────────┼─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼────────┤
-    ___    &hml LCTRL N1  &hml LALT N2   &hml LGUI N3  &hml LSHFT  N4       &kp N5     &kp N6      &hmr RSHFT N7  &hmr LGUI N8  &hmr LALT N9 &hmr LCTRL N0    &kp EQUAL 
+    ___        ___             ___            ___           ___          ___          ___           &kp EXCL     &kp HASH      &kp DLLR       &kp PLUS     &kp EQUAL       
 //├──────┼───────────────┼─────────────┼─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼────────┤
-   &kp F12     &kp F1         &kp F2         &kp F3         &kp F4      &kp F5          &kp F6         &kp F7        &kp F8        &kp F9        &kp F10     &kp F11 
+    ___        ___          ___             ___             ___          ___            ___          &kp CARET     &kp AT      &kp PRCNT         ___         ___    
 //├──────┤ ╰─────────────┼─────────────┴─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┴───────────────────────────┴────────┤
                                            ___         ___           ___              ___           ___              ___                                             
 //                                     ╰─────────────┴─────────────┴─────────────╯  ╰───────────────────────────┴─────────────╯                                      
@@ -263,7 +219,7 @@ ZMK_LAYER(uc,
 //╭──────┬───────────────┬─────────────┬─────────────┬─────────────┬─────────────╮  ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬────────╮
     ___      ___           &kp N7        &kp N8        &kp N9        ___               &kp FSLH        &kp N7        &kp N8        &kp N9        &kp MINUS       ___ 
 //├──────┼───────────────┼─────────────┼─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼────────┤
-    ___      &hml LCTRL N0  &hml LALT N4  &hml LGUI N5 &hml LSHFT N6 ___            &kp KP_MULTIPLY  &hmr RSHFT N4  &hmr LGUI N5  &hmr LALT N6 &hmr LCTRL PLUS  ___ 
+    ___      &hml LCTRL N0  &hml LALT N4  &hml LGUI N5 &hml LSHFT N6 ___            &kp KP_MULTIPLY  &hmr RSHFT N4  &hmr LGUI N5  &hmr LALT N6 &hmr LCTRL PLUS  &kp EQUAL
 //├──────┼───────────────┼─────────────┼─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼────────┤
     ___      ___           &kp N1        &kp N2        &kp N3        ___              ___             &kp N1        &kp N2        &kp N3        &kp DOT        ___ 
 //├──────┤ ╰─────────────┼─────────────┴─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┴───────────────────────────┴────────┤
