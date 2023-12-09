@@ -77,6 +77,13 @@ ZMK_BEHAVIOR(smart_shft, mod_morph,
     /delete-property/ ignore-modifiers;
 };
 
+# SYS activation
+ZMK_BEHAVIOR(hold_sys, hold_tap,
+    flavor = "hold-preferred";
+    tapping-term-ms = <500>;
+    bindings = <&none>, <&mo SYS>;
+)
+
 // tap: num-word | double-tap: sticky num-layer | hold: num-layer
 #define SMART_NUM &smart_num NUM 0
 ZMK_BEHAVIOR(smart_num, hold_tap,
@@ -169,7 +176,7 @@ ZMK_LAYER(nav,
 //├──────┼───────────────┼─────────────┼─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼────────┤
     ___      ___           ___           ___           ___           ___              &kp PG_DN     &kp TAB       &kp LT        &kp GT        ___             ___ 
 //├──────┤ ╰─────────────┼─────────────┴─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┴───────────────────────────┴────────┤
-                                           ___         ___           ___              ___           CANCEL            ___                                  
+                                           ___         ___           ___              ___             ___             ___                                  
 //                                     ╰─────────────┴─────────────┴─────────────╯  ╰─────────────┴─────────────┴─────────────╯                        
 )
 
