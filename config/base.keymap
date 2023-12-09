@@ -43,6 +43,13 @@
     quick-tap-ms = <QUICK_TAP_MS>;
 };
 
+# slow layer-tap
+&s_lt {  // layer-tap config
+    flavor = "hold-preferred";
+    tapping-term-ms = <500>;
+    quick-tap-ms = <QUICK_TAP_MS>;
+};
+
 /* Homerow mods */
 
 #define KEYS_L LT0 LT1 LT2 LT3 LT4 LT5 LM0 LM1 LM2 LM3 LM4 LM5 LB0 LB1 LB2 LB3 LB4 LB5  // left hand
@@ -76,13 +83,6 @@ ZMK_BEHAVIOR(smart_shft, mod_morph,
 &caps_word {  // mods deactivate caps-word, requires PR #1451
     /delete-property/ ignore-modifiers;
 };
-
-// SYS activation
-ZMK_BEHAVIOR(hold_sys, hold_tap,
-    flavor = "hold-preferred";
-    tapping-term-ms = <500>;
-    bindings = <&none>, <&mo SYS>;
-)
 
 // tap: num-word | double-tap: sticky num-layer | hold: num-layer
 #define SMART_NUM &smart_num NUM 0
@@ -164,7 +164,7 @@ ZMK_LAYER(base,
 //├──────┼───────────────┼─────────────┼─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┴────────┤
 &smart_shft    &kp Z         &kp X         &kp C         &kp V         &kp B            &kp N         &kp M      &comma_morph  &dot_morph    &kp FSLH     &smart_shft
 //├──────┤ ╰─────────────┼─────────────┴─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┴───────────────────────────┴────────╯
-                                             ___        &kp LGUI     &lt NUM RET      &lt UC SPACE  &mo NAV      &lt FN &none     
+                                       &s_lt SYS &none   &kp LGUI     &lt NUM RET      &lt UC SPACE  &mo NAV      &lt FN &none     
 //                                     ╰─────────────┴─────────────┴─────────────╯  ╰─────────────┴─────────────┴─────────────╯
 )
 
