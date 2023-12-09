@@ -43,7 +43,7 @@
     quick-tap-ms = <QUICK_TAP_MS>;
 };
 
-# slow layer-tap
+// slow layer-tap
 &s_lt {  // layer-tap config
     flavor = "hold-preferred";
     tapping-term-ms = <500>;
