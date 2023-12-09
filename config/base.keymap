@@ -77,7 +77,7 @@ ZMK_BEHAVIOR(smart_shft, mod_morph,
     /delete-property/ ignore-modifiers;
 };
 
-# SYS activation
+// SYS activation
 ZMK_BEHAVIOR(hold_sys, hold_tap,
     flavor = "hold-preferred";
     tapping-term-ms = <500>;
