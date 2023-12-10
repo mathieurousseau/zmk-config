@@ -94,12 +94,6 @@ ZMK_BEHAVIOR(num_dance, tap_dance,
     continue-list = <BSPC DEL DOT COMMA PLUS MINUS STAR FSLH EQUAL>;
 };
 
-// Sys
-ZMK_BEHAVIOR(hold_sys, hold_tap,
-    tapping-term-ms = <500>;
-    bindings = <&mo SYS>, <&none>;
-)
-
 // smart-mouse, requires PR #1366
 ZMK_BEHAVIOR(smart_mouse, tri_state,
     bindings = <&tog MOUSE>, <&none>, <&tog MOUSE>;
@@ -163,7 +157,7 @@ ZMK_LAYER(base,
 //├──────┼───────────────┼─────────────┼─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┴────────┤
 &smart_shft    &kp Z         &kp X         &kp C         &kp V         &kp B            &kp N         &kp M      &comma_morph  &dot_morph    &kp FSLH     &smart_shft
 //├──────┤ ╰─────────────┼─────────────┴─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┴───────────────────────────┴────────╯
-                                          &hold_sys     &kp LGUI     &lt NUM RET      &lt UC SPACE  &mo NAV      &lt FN &none     
+                                          &mo SYS       &kp LGUI     &lt NUM RET      &lt UC SPACE  &mo NAV      &lt FN &none     
 //                                     ╰─────────────┴─────────────┴─────────────╯  ╰─────────────┴─────────────┴─────────────╯
 )
 
