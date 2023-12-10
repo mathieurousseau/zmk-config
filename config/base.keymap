@@ -96,8 +96,8 @@ ZMK_BEHAVIOR(num_dance, tap_dance,
 
 // Sys
 ZMK_BEHAVIOR(hold_sys, hold_tap,
-    bindings = <&none>, <&mo SYS>;
     tapping-term-ms = <500>;
+    bindings = <&mo SYS>, <&none>;
 )
 
 // smart-mouse, requires PR #1366
