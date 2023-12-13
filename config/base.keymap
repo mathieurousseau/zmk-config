@@ -66,6 +66,13 @@ MAKE_HRM(hmr_lpar_lt, &kp, &lpar_lt, KEYS_L THUMBS)    // "    "   "   "
 MAKE_HRM(hmr_rpar_gt, &kp, &rpar_gt, KEYS_L THUMBS)    // "    "   "   "
 
 
+// SMART_SPACE
+ZMK_BEHAVIOR(lt_spc, hold_tap,
+    flavor = "hold-preferred";
+    tapping-term-ms = <200>;
+    quick-tap-ms = <QUICK_TAP_MS>;
+    bindings = <&mo>, <&kp SPACE>;
+)
 /* Caps-word, num-word and smart-mouse */
 
 // tap: sticky-shift | shift + tap/ double-tap: caps-word | hold: shift
@@ -153,11 +160,11 @@ ZMK_LAYER(base,
 //╭──────┬───────────────┬─────────────┬─────────────┬─────────────┬─────────────╮  ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬────────╮
  &kp TAB       &kp Q         &kp W         &kp E         &kp R         &kp T            &kp Y         &kp U         &kp I         &kp O         &kp P        &kp GRAVE
 //├──────┼───────────────┼─────────────┼─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┴────────┤
- &kp ESC       &hml LCTRL A   &hml LALT S   &hml LGUI D  &hml LSHFT F  &kp G            &kp H         &hmr RSHFT J  &hmr LGUI K  &hmr LALT L   &hmr LCTRL SEMI   &kp SQT
+ &kp ESC       &hml LCTRL A   &hml LALT S   &hml LGUI D  &hml LSHFT F  &kp G            &kp H         &hmr RSHFT J  &hmr LGUI K  &hmr LALT L &hmr LCTRL SEMI   &kp SQT
 //├──────┼───────────────┼─────────────┼─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┴────────┤
 &smart_shft    &kp Z         &kp X         &kp C         &kp V         &kp B            &kp N         &kp M      &comma_morph  &dot_morph    &kp FSLH     &smart_shft
 //├──────┤ ╰─────────────┼─────────────┴─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┴───────────────────────────┴────────╯
-                                        &smart_shft     &kp LGUI     &lt NUM RET      &lt UC SPACE  &mo NAV      &lt FN &trans    
+                                        &smart_shft     &kp LGUI     &lt NUM RET      &lt_spc UC  &mo NAV      &lt FN &trans    
 //                                     ╰─────────────┴─────────────┴─────────────╯  ╰─────────────┴─────────────┴─────────────╯
 )
 
@@ -191,7 +198,7 @@ ZMK_LAYER(num,
 //├──────┼───────────────┼─────────────┼─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼────────┤
     ___      ___          &kp RBKT        &kp LPAR      &kp RPAR    &kp  PLUS          &kp COMMA     &kp  N4       &kp  N5           &kp  N6       ___         ___
 //├──────┼───────────────┼─────────────┼─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼────────┤
-    ___      ___           &kp MINUS       &kp LT        &kp GT          &kp EQUAL      &kp DOT          &kp N1        &kp N2        &kp N3        &kp FSLH        ___ 
+    ___      ___           &kp LT         &kp MINUS     &kp GT          &kp EQUAL      &kp DOT          &kp N1        &kp N2        &kp N3        &kp FSLH        ___ 
 //├──────┤ ╰─────────────┼─────────────┴─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┴───────────────────────────┴────────┤
                                             ___       ___           ___              ___            &kp N0            ___                                              
 //                                     ╰─────────────┴─────────────┴─────────────╯  ╰─────────────┴─────────────┴─────────────╯                                       
@@ -211,11 +218,11 @@ ZMK_LAYER(sys,
 
 ZMK_LAYER(uc,
 //╭──────┬───────────────┬─────────────┬─────────────┬─────────────┬─────────────╮  ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬────────╮
-    ___       ___          &kp LBKT        &kp LBRC      &kp RBRC       ___             &kp AT        &kp AMPS     &kp HASH        &kp STAR     &kp DLLR     ___               
+    ___       ___               ___        &kp LBRC      &kp RBRC       ___             &kp AT        &kp AMPS     &kp HASH        &kp STAR     &kp DLLR     ___               
 //├──────┼───────────────┼─────────────┼─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼────────┤
-    ___        ___        &kp RBKT        &kp LPAR      &kp RPAR       &kp PLUS        &kp EXCL     &kp PERCENT   &kp UNDER       &kp EQUAL     &kp BSLH     &kp DQT       
+    ___        ___              ___        &kp LPAR      &kp RPAR       &kp PLUS        &kp EXCL     &kp PERCENT   &kp UNDER       &kp EQUAL     &kp BSLH     &kp DQT       
 //├──────┼───────────────┼─────────────┼─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┼────────┤
-    ___        ___         &kp MINUS       &kp LT        &kp GT       &kp EQUAL         ___          &kp CARET     &kp COMMA   &kp DOT          &kp FSLH       ___    
+    ___        ___           &kp LT       &kp MINUS     &kp GT       &kp EQUAL         ___          &kp CARET     &kp COMMA   &kp DOT          &kp FSLH       ___    
 //├──────┤ ╰─────────────┼─────────────┴─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┴───────────────────────────┴────────┤
                                            ___         ___           ___              ___           ___              ___                                             
 //                                     ╰─────────────┴─────────────┴─────────────╯  ╰───────────────────────────┴─────────────╯                                      
