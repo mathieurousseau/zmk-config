@@ -19,8 +19,8 @@
 #include "combos.dtsi"  // requires layer aliases
 // #include "extra_keys.h"
 
+#define ___ &trans
 #define XXX &none
-#define ___ &none
 
 /* Global settings */
 
@@ -68,10 +68,10 @@ MAKE_HRM(hmr_rpar_gt, &kp, &rpar_gt, KEYS_L THUMBS)    // "    "   "   "
 ZMK_BEHAVIOR(lt_spc, hold_tap,
     flavor = "hold-preferred";
     tapping-term-ms = <200>;
-    require-prior-idle-ms = <150>;
-    quick-tap-ms = <QUICK_TAP_MS>;
     bindings = <&mo>, <&kp>;
 )
+
+
 
 // tap: sticky-shift | shift + tap/ double-tap: caps-word | hold: shift
 ZMK_BEHAVIOR(smart_shft, mod_morph,
@@ -138,7 +138,7 @@ ZMK_LAYER(base,
 //├──────┼───────────────┼─────────────┼─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┴────────┤
 &smart_shft    &kp Z         &kp X         &kp C         &kp V         &kp B            &kp N         &kp M      &comma_morph  &dot_morph    &kp FSLH     &smart_shft
 //├──────┤ ╰─────────────┼─────────────┴─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┴───────────────────────────┴────────╯
-                                            ___        &smart_shft   &lt NUM RET      &mo UC         &lt NAV SPACE      &lt FN K_CANCEL     
+                                            ___        &smart_shft   &lt NUM RET      &mo UC         &lt_spc NAV SPACE      &lt FN K_CANCEL     
 //                                     ╰─────────────┴─────────────┴─────────────╯  ╰─────────────┴─────────────┴─────────────╯
 )
 
