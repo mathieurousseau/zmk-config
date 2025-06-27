@@ -444,3 +444,4 @@ remaining issues:
     many of the benefits that make Nix uniquely powerful. A better approach,
     though beyond the scope of this document, is to use `home-manager` to
     maintain your user environment.
+
