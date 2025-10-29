@@ -18,12 +18,12 @@
 ---
 manifest:
   defaults:
-    remote: mathieurousseau
+    remote: urob
     revision: v0.3 # Pin everything to v0.3
 
   remotes:
-    - name: mathieurousseau
-      url-base: https://github.com/mathieurousseau
+    - name: urob
+      url-base: https://github.com/urob
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
 
