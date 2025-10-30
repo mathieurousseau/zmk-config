@@ -163,8 +163,8 @@ SIMPLE_MORPH(rpar_rbrc, SFT, &kp RPAR, &kp RBRC)
 
 /* Mathieu */
 
-SIMPLE_MORPH(lbkt_lt, SFT, &kp LBKT, &kp LT)
-SIMPLE_MORPH(rbkt_gt, SFT, &kp RBKT, &kp GT)
+SIMPLE_MORPH(lbkt_lbrc, SFT, &kp LBKT, &kp LBRC)
+SIMPLE_MORPH(rbkt_rbrc, SFT, &kp RBKT, &kp RBRC)
 
 /* end of Mathieu*/
 
