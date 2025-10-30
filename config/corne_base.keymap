@@ -147,11 +147,11 @@ ZMK_TRI_STATE(swapper, bindings = <&kt LALT>, <&kp TAB>, <&kt LALT>;
                 bindings = <BINDING1>, <BINDING2>;)
 
 // Tap: comma | Shift + tap: semicolon | Ctrl + shift + tap: <.
-SIMPLE_MORPH(comma_morph, SFT, &kp COMMA, &kp PIPE)
+SIMPLE_MORPH(comma_grave, SFT, &kp COMMA, &kp GRAVE)
 // SIMPLE_MORPH(comma_inner_morph, CTL, &kp SEMICOLON, &kp LESS_THAN)
 
 // tap: dot | shift + tap: colon | ctrl + shift + tap: >
-SIMPLE_MORPH(dot_morph, SFT, &kp DOT, &kp GT)
+SIMPLE_MORPH(dot_tilde, SFT, &kp DOT, &kp TILDE)
 // SIMPLE_MORPH(dot_inner_morph, CTL, &kp COLON, &kp GREATER_THAN)
 
 // Tap: qmark | Shift + tap: excl.
@@ -210,7 +210,7 @@ ZMK_BASE_LAYER(Base,
 //├──────┼───────────────┼─────────────┼─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┴────────┤
    &mo FN      &hml LCTRL A   &hml LALT S   &hml LGUI D  &hml LSHFT F  &kp G     ,      &kp H         &hmr RSHFT J  &hmr LGUI K  &hmr LALT L &hmr LCTRL SQT  &kp RET,
 //├──────┼───────────────┼─────────────┼─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┴────────┤
-MAGIC_SHIFT    &kp Z         &kp X         &kp C         &kp V         &kp B     ,      &kp N         &kp M      &comma_morph  &dot_morph    &kp FSLH     MAGIC_SHIFT,
+MAGIC_SHIFT    &kp Z         &kp X         &kp C         &kp V         &kp B     ,      &kp N         &kp M      &comma_grave  &dot_tilde    &kp FSLH     MAGIC_SHIFT,
 //├──────┤ ╰─────────────┼─────────────┴─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┴───────────────────────────┴────────╯
                                            &mo NUM       &kp RET     MAGIC_SHIFT ,      &mo UC        &kp SPACE       &mo NAV     
 //                                     ╰─────────────┴─────────────┴─────────────╯  ╰─────────────┴─────────────┴─────────────╯
