@@ -158,8 +158,15 @@ SIMPLE_MORPH(dot_morph, SFT, &kp DOT, &kp GT)
 // SIMPLE_MORPH(qexcl, SFT, &kp QMARK, &kp EXCL)
 
 // Tap: left/right parenthesis | Shft + tap: less-than/greater-than.
-SIMPLE_MORPH(lpar_lt, SFT, &kp LPAR, &kp LT)
-SIMPLE_MORPH(rpar_gt, SFT, &kp RPAR, &kp GT)
+SIMPLE_MORPH(lpar_lbrc, SFT, &kp LPAR, &kp LBRC)
+SIMPLE_MORPH(rpar_rbrc, SFT, &kp RPAR, &kp RBRC)
+
+/* Mathieu */
+
+SIMPLE_MORPH(lbkt_lt, SFT, &kp LBKT, &kp LT)
+SIMPLE_MORPH(rbkt_gt, SFT, &kp RBKT, &kp GT)
+
+/* end of Mathieu*/
 
 // Tap: space | Shift + tap: dot -> space -> sticky shift | Hold: nav layer.
 // ZMK_HOLD_TAP(lt_spc, bindings = <&mo>, <&spc_morph>; flavor = "balanced";
