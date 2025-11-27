@@ -198,7 +198,7 @@ SIMPLE_MORPH(rbkt_rbrc, SFT, &kp RBKT, &kp RBRC)
 
 /* Keymap */
 
-ZMK_CONDITIONAL_LAYER(sys, FN NUM, SYS) // FN + NUM --> SYS.
+// ZMK_CONDITIONAL_LAYER(sys, FN NUM, SYS) // FN + NUM --> SYS.
 
 #ifndef ZMK_BASE_LAYER
   #define ZMK_BASE_LAYER(name, LT, RT, LM, RM, LB, RB, LH, RH)                 \
@@ -209,7 +209,7 @@ ZMK_BASE_LAYER(Base,
 //╭──────┬───────────────┬─────────────┬─────────────┬─────────────┬─────────────╮  ╭─────────────┬─────────────┬─────────────┬─────────────┬─────────────┬────────╮
    &mo SYS       &kp Q         &kp W         &kp E         &kp R         &kp T     ,      &kp Y         &kp U         &kp I         &kp O         &kp P      CANCEL,
 //├──────┼───────────────┼─────────────┼─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┴────────┤
-   &mo FN      &hml LCTRL A   &hml LALT S   &hml LGUI D  &hml LSHFT F  &kp G     ,      &kp H         &hmr RSHFT J  &hmr LGUI K  &hmr LALT L &hmr LCTRL SQT  CANCEL,
+   &mo FN      &hml LCTRL A   &hml LALT S   &hml LGUI D  &hml LSHFT F  &kp G     ,      &kp H         &hmr RSHFT J  &hmr LGUI K  &hmr LALT L &hmr LCTRL SQT  &kp RET,
 //├──────┼───────────────┼─────────────┼─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┼─────────────┼─────────────┴────────┤
 MAGIC_SHIFT    &kp Z         &kp X         &kp C         &kp V         &kp B     ,      &kp N         &kp M      &comma_grave  &dot_tilde    &kp FSLH     MAGIC_SHIFT,
 //├──────┤ ╰─────────────┼─────────────┴─────────────┼─────────────┼─────────────┤  ├─────────────┼─────────────┼─────────────┴───────────────────────────┴────────╯
