@@ -5,6 +5,13 @@ on:
     paths:
       - config/**
       - build.yaml
+  pull_request:
+    paths:
+      - config/**
+      - build.yaml
+
+permissions:
+  contents: read
 
 jobs:
   build:
